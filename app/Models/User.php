@@ -10,18 +10,16 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Kolom yang boleh diisi secara massal (Mass Assignment).
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role', // <-- Kolom role sudah terdaftar di sini
     ];
 
     /**
@@ -45,5 +43,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Helper method untuk cek apakah user adalah Admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Helper method untuk cek apakah user adalah User biasa
+     */
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
     }
 }
