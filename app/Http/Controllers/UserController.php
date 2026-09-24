@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\Uppercase;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
 class UserController extends Controller
 {
-    public function index()
-    {
-        $nama = auth()->user()->name;
+  public function showForm(): View
+  {
+    return view('view_rek');
+  }
 
-        return view('user.dashboard', compact('nama'));
-    }
+  public function submitForm(Request $request): RedirectResponse
+  {
+    $validated = $request->validate([
+      'nama' => ['required', 'string', 'min:3', new Uppercase],
+    ], [
+      'nama.required' => 'Nama wajib diisi.',
+      'nama.min' => 'Nama minimal terdiri dari 3 karakter.',
+    ]);
 
-    public function profile()
-    {
-        $user = auth()->user();
-
-        return view('user.profile', compact('user'));
-    }
+    return redirect()
+      ->route('uppercase.form')
+      ->with('success', 'Validasi berhasil. Nama ' . $validated['nama'] . ' sudah menggunakan huruf kapital.');
+  }
 }

@@ -18,6 +18,19 @@ class UsersTableSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+            'password' => 'bcrypt'('password123'),
+            'role' => 'user'
+        ]);
+
+        $id = DB::table('users')->insertGetId([
+            'name' => 'Jane',
+            'email' => 'jane@example.com',
+            'password' => bcrypt('password123')
+        ]);
+
         User::factory()->count(5)->create();
     }
 }

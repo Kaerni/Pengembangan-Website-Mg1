@@ -4,8 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 
-// Langkah 4: Rute Utama / Dashboard POS (Memanggil View & Mengirim Data)
+Route::get('/login', [LoginController::class, 'showForm'])->name('login.show');
+Route::post('/login', [LoginController::class, 'submitForm'])->name('login.submit');
+
+Route::get('/uppercase', [UserController::class, 'showForm'])->name('uppercase.form');
+Route::post('/uppercase', [UserController::class, 'submitForm'])->name('uppercase.submit');
+
 Route::get('/', function () {
     return view('dashboard_pos', [
         'nama_pegawai' => 'Budi Santoso',
@@ -44,8 +51,6 @@ Route::prefix('kasir')->group(function () {
     })->name('kasir.transaksi');
 });
 
-// Tugas Mandiri: Rute Produk Toko
-// Tugas Mandiri: Rute Produk Toko dari Database MySQL
 Route::get('/produk-toko', function () {
     $produk = Product::all(); // Mengambil seluruh data produk dari tabel products
     return view('daftar_produk', compact('produk'));

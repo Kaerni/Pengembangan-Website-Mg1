@@ -34,6 +34,18 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Custom pesan error validasi input
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required'    => 'Email tidak boleh kosong!',
+            'email.email'       => 'Format email tidak valid!',
+            'password.required' => 'Password tidak boleh kosong!',
+        ];
+    }
+
+    /**
      * Attempt to authenticate the request's credentials.
      *
      * @throws ValidationException
@@ -46,7 +58,8 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                // Mengganti pesan default 'auth.failed' dengan pesan Bahasa Indonesia
+                'email' => 'Email atau password yang kamu masukkan salah.',
             ]);
         }
 
@@ -69,10 +82,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => "Terlalu banyak percobaan login. Silakan coba lagi dalam {$seconds} detik.",
         ]);
     }
 
