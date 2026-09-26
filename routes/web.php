@@ -14,7 +14,7 @@ Route::get('/uppercase', [UserController::class, 'showForm'])->name('uppercase.f
 Route::post('/uppercase', [UserController::class, 'submitForm'])->name('uppercase.submit');
 
 Route::get('/', function () {
-    return view('dashboard_pos', [
+    return view('kasir.dashboard', [
         'nama_pegawai' => 'Budi Santoso',
         'shift' => 'Pagi (08:00 - 15:00)'
     ]);
@@ -53,10 +53,10 @@ Route::prefix('kasir')->group(function () {
 
 Route::get('/produk-toko', function () {
     $produk = Product::all(); // Mengambil seluruh data produk dari tabel products
-    return view('daftar_produk', compact('produk'));
+    return view('produk.index', compact('produk'));
 });
 
 Route::get('/suppliers', function () {
     $suppliers = Supplier::all();
-    return view('daftar_supplier', compact('suppliers'));
+    return view('supplier.index', compact('suppliers'));
 });

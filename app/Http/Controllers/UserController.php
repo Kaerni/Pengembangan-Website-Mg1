@@ -11,7 +11,7 @@ class UserController extends Controller
 {
   public function showForm(): View
   {
-    return view('view_rek');
+    return view('user.uppercase');
   }
 
   public function submitForm(Request $request): RedirectResponse
