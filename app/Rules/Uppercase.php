@@ -8,17 +8,13 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class Uppercase implements ValidationRule
 {
     /**
-     * Jalankan aturan validasi.
-     *
-     * @param  string  $attribute  Nama field yang divalidasi (misal: 'name')
-     * @param  mixed   $value      Isi inputan dari user
-     * @param  \Closure(string, ?string): \Illuminate\Translation\PotentiallyTranslatedString  $fail  Fungsi untuk memicu pesan error
+     * Run the validation rule.
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // Jika nilai tidak sama dengan versi kapitalnya, panggil $fail
+        // Mengecek apakah string input TIDAK sama dengan versi KAPITAL-nya
         if (strtoupper($value) !== $value) {
-            $fail(':attribute harus ditulis dalam huruf kapital.', null);
+            $fail('Kolom :attribute harus menggunakan huruf KAPITAL semua.');
         }
     }
 }

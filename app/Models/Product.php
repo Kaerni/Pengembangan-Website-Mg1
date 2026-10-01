@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory; // <-- Pastikan ini ter-import
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
-{
-    use HasFactory; // <-- TAMBAHKAN BARIS INI
-
-    protected $fillable = ['category_id', 'name', 'sku', 'price', 'stock'];
+{// Relasi Kebalikan: Satu Produk DIMILIKI OLEH Satu Kategori
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

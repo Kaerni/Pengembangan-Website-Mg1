@@ -12,8 +12,9 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Admin Baru',
-            'email' => 'admin2@example.com',
+            'name' => 'Admin Rek',
+            'email' => 'admin22@example.com',
+            'age' => 25,
             'password' => Hash::make('password'),
             'role' => 'admin',
         ]);
@@ -21,13 +22,15 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
-            'password' => 'bcrypt'('password123'),
+            'age' => 21,
+            'password' => bcrypt('password123'), // Selesai diperbaiki (tanpa kutip di 'bcrypt')
             'role' => 'user'
         ]);
 
         $id = DB::table('users')->insertGetId([
             'name' => 'Jane',
-            'email' => 'jane@example.com',
+            'email' => 'jane123@example.com',
+            'age' => 29,
             'password' => bcrypt('password123')
         ]);
 

@@ -15,13 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Jalankan Seeder Kategori terlebih dahulu
+        // 1. Jalankan Seeder User (TAMBAHKAN BARIS INI)
+        $this->call(UsersTableSeeder::class);
+
+        // 2. Jalankan Seeder Kategori terlebih dahulu
         $this->call(CategorySeeder::class);
 
-        // 2. Jalankan Seeder Supplier (Tugas Mandiri)
+        // 3. Jalankan Seeder Supplier (Tugas Mandiri)
         $this->call(SupplierSeeder::class);
 
-        // 3. Jalankan Factory Produk untuk membuat 50 data dummy produk
+        // 4. Jalankan Factory Produk untuk membuat 50 data dummy produk
         Product::factory(50)->create();
     }
 }
