@@ -18,10 +18,12 @@
                 <ul class="navbar-nav me-auto">
                     @if(auth()->user()->role === 'admin')
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.produk') }}">Produk</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.kategori') }}">Kategori</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.users') }}">Kelola User</a></li>
                     @else
                         <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">Dashboard Kasir</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('user.profile') }}">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('profile.edit') }}">Profile</a></li>
                     @endif
                     <li class="nav-item"><a class="nav-link" href="/laporan">Laporan</a></li>
                 </ul>

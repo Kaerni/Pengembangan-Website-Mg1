@@ -4,16 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes; // Import SoftDeletes
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
     // Pasang trait SoftDeletes di sini (Cukup panggil SEKALI saja di paling atas)
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, MustVerifyEmailTrait, Notifiable, SoftDeletes;
 
     /**
      * Kolom yang boleh diisi secara massal (Mass Assignment).

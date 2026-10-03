@@ -39,3 +39,27 @@ test('users can logout', function () {
     $this->assertGuest();
     $response->assertRedirect('/');
 });
+
+test('admins are sent to the admin dashboard and cannot open the cashier dashboard', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    $this->actingAs($admin)
+        ->get(route('dashboard'))
+        ->assertRedirect(route('admin.dashboard'));
+
+    $this->get(route('admin.dashboard'))->assertOk();
+    $this->get(route('admin.produk'))->assertOk();
+    $this->get(route('admin.kategori'))->assertOk();
+    $this->get(route('user.dashboard'))->assertForbidden();
+});
+
+test('cashiers are sent to the minimarket dashboard and cannot open the admin dashboard', function () {
+    $cashier = User::factory()->create(['role' => 'user']);
+
+    $this->actingAs($cashier)
+        ->get(route('dashboard'))
+        ->assertRedirect(route('user.dashboard'));
+
+    $this->get(route('user.dashboard'))->assertOk();
+    $this->get(route('admin.dashboard'))->assertForbidden();
+});
