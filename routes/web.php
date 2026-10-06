@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
         })->name('kategori');
     });
 
-    Route::middleware('role:user')->get('/minimarket', function () {
+    Route::middleware('role:user')->get('/kasir', function () {
         return view('kasir.dashboard', [
             'nama_pegawai' => auth()->user()->name,
             'shift' => 'Kasir Aktif',

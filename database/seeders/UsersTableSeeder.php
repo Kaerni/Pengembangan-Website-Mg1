@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'age' => 21,
-            'password' => bcrypt('password123'), // Selesai diperbaiki (tanpa kutip di 'bcrypt')
+            'password' => bcrypt('password123'),
             'role' => 'user'
         ]);
 

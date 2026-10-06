@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Supplier Toko</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container my-5">
-        <div class="card shadow-sm p-4">
-            <h2 class="mb-4">Daftar Supplier (Tugas Mandiri)</h2>
-            <table class="table table-bordered table-striped align-middle">
-                <thead class="table-primary">
+<x-app-layout>
+    <x-slot name="header">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Katalog</p>
+            <h1 class="mt-1 text-xl font-semibold text-gray-900">Supplier</h1>
+        </div>
+    </x-slot>
+
+    <section class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+        <div class="border-b border-gray-200 px-5 py-4 sm:px-6">
+            <h2 class="text-base font-semibold text-gray-900">Daftar supplier</h2>
+            <p class="mt-1 text-sm text-gray-500">Informasi mitra pemasok toko.</p>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+                <thead class="bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
                     <tr>
-                        <th>No</th>
-                        <th>Nama Supplier</th>
-                        <th>No. Telepon</th>
-                        <th>Alamat</th>
+                        <th scope="col" class="w-16 px-5 py-3 font-semibold sm:px-6">No.</th>
+                        <th scope="col" class="px-5 py-3 font-semibold sm:px-6">Nama supplier</th>
+                        <th scope="col" class="px-5 py-3 font-semibold sm:px-6">No. telepon</th>
+                        <th scope="col" class="px-5 py-3 font-semibold sm:px-6">Alamat</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($suppliers as $index => $item)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td><strong>{{ $item->name }}</strong></td>
-                        <td>{{ $item->phone }}</td>
-                        <td>{{ $item->address }}</td>
-                    </tr>
-                    @endforeach
+                <tbody class="divide-y divide-gray-100">
+                    @forelse ($suppliers as $index => $item)
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-5 py-4 text-gray-500 sm:px-6">{{ $index + 1 }}</td>
+                            <td class="whitespace-nowrap px-5 py-4 font-medium text-gray-900 sm:px-6">{{ $item->name }}</td>
+                            <td class="whitespace-nowrap px-5 py-4 text-gray-600 sm:px-6">{{ $item->phone }}</td>
+                            <td class="min-w-56 px-5 py-4 text-gray-600 sm:px-6">{{ $item->address }}</td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="4" class="px-5 py-10 text-center text-sm text-gray-500 sm:px-6">Belum ada supplier yang tersedia.</td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-    </div>
-</body>
-</html>
+    </section>
+</x-app-layout>

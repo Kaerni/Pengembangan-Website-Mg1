@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +23,7 @@ class DatabaseSeeder extends Seeder
         // 3. Jalankan Seeder Supplier (Tugas Mandiri)
         $this->call(SupplierSeeder::class);
 
-        // 4. Jalankan Factory Produk untuk membuat 50 data dummy produk
-        Product::factory(50)->create();
+        // 4. Isi katalog produk minimarket
+        $this->call(ProductSeeder::class);
     }
 }

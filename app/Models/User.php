@@ -14,12 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    // Pasang trait SoftDeletes di sini (Cukup panggil SEKALI saja di paling atas)
     use HasFactory, MustVerifyEmailTrait, Notifiable, SoftDeletes;
-
-    /**
-     * Kolom yang boleh diisi secara massal (Mass Assignment).
-     */
     protected $fillable = [
         'name',
         'email',
@@ -53,10 +48,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
         ];
     }
 
-    /**
-     * ACCESSOR: Mengubah format tampilan nama menjadi KAPITAL SEMUA
-     * Dipanggil via: $user->formatted_name
-     */
     protected function formattedName(): Attribute
     {
         return Attribute::make(
@@ -64,10 +55,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
         );
     }
 
-    /**
-     * ACCESSOR: Menggabungkan Nama dan Role
-     * Dipanggil via: $user->name_with_role
-     */
     protected function nameWithRole(): Attribute
     {
         return Attribute::make(
@@ -75,9 +62,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
         );
     }
 
-    /**
-     * MUTATOR: Otomatis mengubah input nama menjadi ucwords (Huruf Depan Kapital) sebelum disimpan
-     */
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -85,17 +69,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
         );
     }
 
-    /**
-     * Helper method untuk cek apakah user adalah Admin
-     */
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
-    /**
-     * Helper method untuk cek apakah user adalah User biasa
-     */
     public function isUser(): bool
     {
         return $this->role === 'user';
