@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/users', [AdminController::class, 'users'])->name('users');
-        Route::get('/produk', function () {
+        Route::get('/produk', function () { 
             return view('produk.index', ['produk' => Product::all()]);
         })->name('produk');
         Route::get('/kategori', function () {
